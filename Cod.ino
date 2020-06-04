@@ -10,7 +10,7 @@ void setup() {
 ////////////////////////////////////////////////////////////////////////
 //Variabile globale
 
-int TimerOverflow=0;
+int overflow=0;
 double distance;
 long count;
 int viteza_nominala=200;
@@ -40,7 +40,7 @@ void Timer1(){
 //Intreruperea de tip overflow
 
 ISR(TIMER1_OVF_vect){
-  TimerOverflow++;  /* Increment Timer Overflow count */
+  overflow++;  /* Increment Timer Overflow count */
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -195,7 +195,7 @@ void CalculPID()
 ////////////////////////////////////////////////////////////////////////
 //Functii pentru motoare
 
-void Fata(){
+void fata(){
   OCR0A=150;
   OCR0B=150;
   PORTB&=~0x1E;
@@ -209,21 +209,21 @@ void Fata(){
   PORTD=&~0x18;
 }*/
 
-void Spate(){
+void spate(){
   OCR0A=120;
   OCR0B=120;
   PORTB&=~0x1E;
   PORTB|=0x0A;
 }
 
-void Stanga(){
+void stanga(){
   OCR0A=10;
   OCR0B=120;
   PORTB&=~0x1E;
   PORTB|=0x10;
 }
 
-void Dreapta(){
+void dreapta(){
   OCR0A=120;
   OCR0B=10;
   PORTB&=~0x1E;
@@ -256,19 +256,19 @@ while(1){
 
   while ((TIFR1 & ~(1 << ICF1)) == 0);/* Wait for falling edge */
     {
-      count = ICR1 + (65535 * TimerOverflow); /* Take count */
+      count = ICR1 + (65535 * overflow); /* Take count */
       /* 16MHz Timer freq, sound speed =343 m/s */
       distance = ((double)count / 932.94);
     }
     if(distance<40)
     {
-      Stanga();
+      stanga();
       Delay1s();
-      Fata();
+      fata();
       Delay10ms();
-      Dreapta();
+      dreapta();
       Delay1s();
-      Fata();
+      fata();
     }
  }
 }

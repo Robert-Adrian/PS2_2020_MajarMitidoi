@@ -230,10 +230,10 @@ void senzor_distanta()
     // ocolire();
     } else {
       //daca nu e obstacol
+      int flag_culoare = culoare();
       if(oprire == 1){ 
         //daca s-a terminat linia
-        int flag_culoare ;
-        flag_culoare = culoare();
+        
         if(flag_culoare == 1){
            delay(3000);
            fata();

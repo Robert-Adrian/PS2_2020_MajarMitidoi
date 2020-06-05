@@ -197,6 +197,36 @@ int culoare(){
   return flag_culoare;
 }
 
+void ocolire() {
+  stanga();
+  TCNT1 = 0;
+  TCNT1++;
+  if (TCNT1 > 45000) {
+    TCNT1=0;
+  }
+  dreapta();
+  TCNT1 = 0;
+  TCNT1++;
+  if (TCNT1 > 1000) {
+    TCNT1=0;
+  }
+  fata();
+  if (TCNT1 > 50000) {
+    TCNT1=0;
+  }
+  dreapta();
+  if (TCNT1 > 45000) {
+    TCNT1=0;
+  }
+  stanga();
+  TCNT1 = 0;
+  TCNT1++;
+  if(TCNT1 > 1000) {
+    TCNT1 = 0;
+  }
+  fata();     
+}
+
 void senzor_distanta()
 {
   float timp;
@@ -227,7 +257,7 @@ void senzor_distanta()
     //apoi in fata pt un anumit timp
     //apoi revenire pana se va semnala vectorul de senzori de linie
     //si apoi se va regla pozitia cu PID
-    // ocolire();
+     ocolire();
     } else {
       //daca nu e obstacol
       int flag_culoare = culoare();

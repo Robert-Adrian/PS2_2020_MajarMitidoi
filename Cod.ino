@@ -216,7 +216,7 @@ void senzor_distanta()
     }
   }
 
-  timp = (((n*65535) + TCNT1) * 0.0625) / 1000000;      //timpul  in secunde 
+  timp = (((overflow_senzor_dist * 65535) + TCNT1) * 0.0625) / 1000000;      //timpul  in secunde 
   distanta = timp * 17150;
 
   if (distanta > 1){
